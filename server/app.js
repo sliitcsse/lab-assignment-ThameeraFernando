@@ -95,6 +95,15 @@ const createProfile = (ctx) => {
   Users.push(newUser);
   ctx.body = Users;
 };
+//get users
+const getUsers = (ctx) => {
+  const customers = Users.filter((person) => {
+    if (person.type === "Customer") {
+      return person;
+    }
+  });
+  ctx.body = customers;
+};
 
 //routes
 
@@ -105,6 +114,8 @@ router.put("/update", update);
 router.delete("/delete", deleteData);
 //create profile route
 router.post("/createProfile", createProfile);
+//get users
+router.get("/getUsers", getUsers);
 
 //middleware for allow all routes and methods
 app.use(router.routes()).use(router.allowedMethods());
