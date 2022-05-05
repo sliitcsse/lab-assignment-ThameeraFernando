@@ -8,6 +8,7 @@ import EditItem from "./pages/EditItem";
 import Customers from "./pages/Customers";
 import Inventory from "./pages/Inventory";
 import Promo from "./pages/Promo";
+import CustomerPage from "./pages/CustomerPage";
 
 const App = () => {
   return (
@@ -16,6 +17,8 @@ const App = () => {
         <Route path="/" element={<Index />}></Route>
         <Route path="/create-profile" element={<CreateProfile />}></Route>
         <Route path="/trader-page" element={<TraderPage />}></Route>
+        <Route path="/customer-page" element={<CustomerPage />}></Route>
+
         <Route
           path="/update-item-page/:id/:itemName/:price/:qty/:promo"
           element={<EditItem />}

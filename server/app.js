@@ -104,7 +104,45 @@ const getUsers = (ctx) => {
   });
   ctx.body = customers;
 };
+//add to cart
+const addToCart = (ctx) => {
+  const crti = ctx.request.body;
+  const cId = new Date().getTime().toString();
+  const crt = cart.find((item) => item.id == crti.id);
+  if (!crt) {
+    const newCartItem = { ...crti, cId };
+    cart.push(newCartItem);
+    ctx.body = cart;
+  }
+};
 
+//add to wish list
+const addToWishList = (ctx) => {
+  const wli = ctx.request.body;
+  const wId = new Date().getTime().toString();
+  const wid = wishList.find((item) => item.id == wli.id);
+  if (!wid) {
+    const newWishItem = { ...wli, wId };
+    wishList.push(newWishItem);
+    ctx.body = wishList;
+  }
+};
+
+//get cart data
+const getCart = async (ctx) => {
+  ctx.body = cart;
+};
+
+//get wishlist data
+const getWishList = async (ctx) => {
+  ctx.body = wishList;
+};
+
+//clear wish list
+const wishlistClear = (ctx) => {
+  wishList = [];
+  ctx.body = wishList;
+};
 //routes
 
 //items routes
@@ -116,7 +154,16 @@ router.delete("/delete", deleteData);
 router.post("/createProfile", createProfile);
 //get users
 router.get("/getUsers", getUsers);
-
+//add to cart route
+router.post("/addToCart", addToCart);
+//add to wishlist route
+router.post("/addToWishList", addToWishList);
+//remove wish list
+router.delete("/wishlistClear", wishlistClear);
+//cart route
+router.get("/getCart", getCart);
+//get wishlist route
+router.get("/getWishList", getWishList);
 //middleware for allow all routes and methods
 app.use(router.routes()).use(router.allowedMethods());
 //listener
